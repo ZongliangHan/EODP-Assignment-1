@@ -22,8 +22,17 @@ data_body['month']=month
 
 #delete the data of year 2021 and reorganise dataframe
 data_body.index = year
-data_body = data_body.loc[['2020'],['location', 'month', 'total_cases', 'new_cases', 'total_deaths', 'new_deaths']]
+data_body_new = data_body.loc[['2020'],['location', 'month', 'new_cases', 'new_deaths']]
+data_body_total = data_body.loc[['2020'],['location', 'month', 'total_cases', 'total_deaths']]
 
-#calculating the data based on location and month
-organised_data = data_body.groupby(['location', 'month']).sum()
+#integreting the tolal_cases and total deaths based on location and month
+data_body_total = data_body_total.groupby(['location','month']).max()
+
+#calculating the new cases and new deaths based on location and month
+data_body_new = data_body_new.groupby(['location', 'month']).sum()
+
+#combine two data frame and reorganise it
+joined_data_body = pd.concat([data_body_new, data_body_total], axis = 1)
+column_names = ['total_cases', 'new_cases', 'total_deaths', 'new_deaths']
+organised_data = joined_data_body.reindex(columns = column_names)
 print (organised_data)
