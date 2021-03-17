@@ -31,8 +31,18 @@ data_body_total = data_body_total.groupby(['location','month']).max()
 #calculating the new cases and new deaths based on location and month
 data_body_new = data_body_new.groupby(['location', 'month']).sum()
 
-#combine two data frame and reorganise it
+#combine two data frame
 joined_data_body = pd.concat([data_body_new, data_body_total], axis = 1)
-column_names = ['total_cases', 'new_cases', 'total_deaths', 'new_deaths']
+
+#calculatng the case fatality rate
+death = joined_data_body['new_deaths']
+cases = joined_data_body['new_cases']
+case_fatality_rate = death/cases
+
+#organise the column in right order
+joined_data_body = pd.concat([joined_data_body, case_fatality_rate], axis = 1)
+joined_data_body.rename(columns={0:'case_fatality_rate'}, inplace = True)
+column_names = ['case_fatality_rate', 'total_cases', 'new_cases', 'total_deaths', 'new_deaths']
 organised_data = joined_data_body.reindex(columns = column_names)
-print (organised_data)
+print (organised_data.head(5))
+organised_data.to_csv(r'/Users/zonglianghan/Desktop/GitHub/EODP-Assignment-1/assignment-1-ZongliangHan-master/owid-covid-data-2020-monthly.csv', header = True, index = True)
