@@ -45,4 +45,4 @@ joined_data_body.rename(columns={0:'case_fatality_rate'}, inplace = True)
 column_names = ['case_fatality_rate', 'total_cases', 'new_cases', 'total_deaths', 'new_deaths']
 organised_data = joined_data_body.reindex(columns = column_names)
 print (organised_data.head(5))
-organised_data.to_csv(r'/Users/zonglianghan/Desktop/GitHub/EODP-Assignment-1/assignment-1-ZongliangHan-master/owid-covid-data-2020-monthly.csv', header = True, index = True)
+organised_data.to_csv(r'assignment-1-ZongliangHan-master/owid-covid-data-2020-monthly.csv', header = True, index = True)
