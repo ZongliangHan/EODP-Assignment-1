@@ -58,6 +58,8 @@ for file in os.listdir('cricket'):  #check if the key words is in article
                     i+=1
             count.append(i)            
         term_count.append(count)
+        
+#check if there is no file matched, exit the program
 if file_name == []:
     sys.exit('No file matched')
 
