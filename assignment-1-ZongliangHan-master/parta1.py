@@ -1,7 +1,8 @@
 import pandas as pd
 import argparse
+
 #read csc file and extract dataframe
-covid_data = pd.read_csv('assignment-1-ZongliangHan-master/owid-covid-data.csv', encoding = 'ISO-8859-1')
+covid_data = pd.read_csv('owid-covid-data.csv', encoding = 'ISO-8859-1')
 countries = covid_data.iloc[:,2]
 data_body = covid_data.iloc[:,[2, 3, 4, 5, 7, 8]]
 
@@ -44,5 +45,9 @@ joined_data_body = pd.concat([joined_data_body, case_fatality_rate], axis = 1)
 joined_data_body.rename(columns={0:'case_fatality_rate'}, inplace = True)
 column_names = ['case_fatality_rate', 'total_cases', 'new_cases', 'total_deaths', 'new_deaths']
 organised_data = joined_data_body.reindex(columns = column_names)
+
+#print out the first 5 rows of final dataframe
 print (organised_data.head(5))
-organised_data.to_csv(r'assignment-1-ZongliangHan-master/owid-covid-data-2020-monthly.csv', header = True, index = True)
+
+#save the dataframe to csv
+organised_data.to_csv(r'owid-covid-data-2020-monthly.csv', header = True, index = True)
