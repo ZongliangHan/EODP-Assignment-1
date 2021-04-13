@@ -27,7 +27,7 @@ data_body_new = data_body.loc[['2020'],['location', 'month', 'new_cases', 'new_d
 data_body_total = data_body.loc[['2020'],['location', 'month', 'total_cases', 'total_deaths']]
 
 #integreting the tolal_cases and total deaths based on location and month
-data_body_total = data_body_total.groupby(['location','month']).max()
+data_body_total = data_body_total.groupby(['location','month']).last()
 
 #calculating the new cases and new deaths based on location and month
 data_body_new = data_body_new.groupby(['location', 'month']).sum()
