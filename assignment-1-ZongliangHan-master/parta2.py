@@ -6,9 +6,9 @@ import numpy as np
 #extract useful data
 covid_data = pd.read_csv('owid-covid-data-2020-monthly.csv')
 total_cases_month = covid_data.iloc[:,[0,3]]
-total_cases_year = total_cases_month.groupby('location').max()
+total_cases_year = total_cases_month.groupby('location').last()
 total_deaths_month = covid_data.iloc[:,[0,5]]
-total_deaths_year = total_deaths_month.groupby('location').max()
+total_deaths_year = total_deaths_month.groupby('location').last()
 case_fatality_rate = total_deaths_year.iloc[:,0]/total_cases_year.iloc[:,0]
 
 #plot scatter with case fatality rate as y value and new cases in 2020 as x value
